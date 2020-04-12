@@ -15,7 +15,7 @@
                 {{#each burger}}
                 {{#unless this.chomped}}
                 <li class="mt-3" style="list-style: none">
-                    <button data-id="{{this.id}}" type="button" class="btn btn-warning eat  mr-3"
+                    <button data-id="{{this.id}}" type="button" class="btn btn-danger eat  mr-3"
                         style="border: solid white 1px">Chomp Down!
                     </button>
                     {{this.burger_name}}
@@ -57,3 +57,50 @@
         </div>
     </div>
 </div>
+<script>
+    $(".add-burger").on("submit", function(event){
+      event.preventDefault();
+  
+      var newBurger = {
+        name: $("#newBurger").val().trim()
+      };
+      if ($("#newBurger").val() === ""){
+        alert("please add burger");
+      } else {
+        $.ajax("/api/add", {
+          type: "POST",
+          data: newBurger
+        }).then(function() {
+          console.log("created new burger");
+          location.reload();
+        });
+      }
+    });
+  
+    $(".eat").on("click", function(event){
+      event.preventDefault();
+  
+      let id = $(this).attr("data-id");
+      console.log(id);
+      $.ajax("/api/eat/" + id, {
+        type: "PUT"
+      }).then(function(resp){
+        console.log(resp);
+        location.reload();
+      });
+    });
+  
+    $(".remove").on("click", function(event){
+      event.preventDefault();
+  
+      let id = $(this).attr("data-id");
+  
+      console.log(id);
+      $.ajax("/api/remove/" + id, {
+        type: "DELETE"
+      }).then(function(resp){
+        console.log(resp);
+        location.reload();
+      });
+    });
+</script>
