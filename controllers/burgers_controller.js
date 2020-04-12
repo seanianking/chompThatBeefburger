@@ -1,5 +1,6 @@
-let express = require('express');
-let burger = require('../models/burger');
+  
+const express = require("express");
+let burger = require("../models/burger");
 const router = express.Router();
 
 router.get("/", function(req, res){
@@ -9,23 +10,27 @@ router.get("/", function(req, res){
     })
 });
 
-router.post("/burgers", function(req, res){
-    burger.insertOne([
-        'burger_name'
-    ], [ req.body.burger_name],
-    function(data) {
-        res.redirect('/');
+router.post("/api/add", function(req, res){
+    let name = req.body.name;
+    burger.create(name, data => {
+        res.json(data);
     })
 })
 
-router.put('/burgers/:id', function(req, res) {
-  var condition = 'id = ' + req.params.id;
+router.put("/api/eat/:id", function(req, res){
+    let id = req.params.id;
 
-  burger.updateOne({
-    chomped: true
-  }, condition, function(data) {
-    res.redirect('/');
-  });
+    burger.update(id, data => {
+        res.json(data);
+    });
+});
+
+router.delete("/api/remove/:id", function(req, res){
+    let id = req.params.id;
+
+    burger.delete(id, data => {
+        res.json(data);
+    });
 });
 
 module.exports = router;
