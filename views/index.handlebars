@@ -1,0 +1,59 @@
+  
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+                <h1 class="px-5 mt-5 text-center">Chomp that Beefburger</h1>
+                </br>
+
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4" >
+            <h3 class="text-center mt-5 ">Menu</h3>
+            <hr style="border-bottom: 3px solid white;">
+            <ul>
+                {{#each burger}}
+                {{#unless this.chomped}}
+                <li class="mt-3" style="list-style: none">
+                    <button data-id="{{this.id}}" type="button" class="btn btn-warning eat  mr-3"
+                        style="border: solid white 1px">Eat It!
+                    </button>
+                    {{this.burger_name}}
+
+                </li>
+                {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-md-4" >
+            <h3 class="text-center mt-5 " >Eaten Burgers</h3>
+            <hr style="border-bottom: 3px solid white;">
+            <ul>
+                {{#each burger}}
+                {{#if this.chomped}}
+                <li class="mt-3" style="list-style: none">
+                    <button data-id="{{this.id}}" type="button" class="btn btn-danger remove  mr-3"
+                        style="border: solid white 1px">Delete</button>
+                    {{this.burger_name}}
+
+                </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h2 class="text-center ">Add a burger to the Menu!</h2>
+        <div class="row d-flex justify-content-center">
+
+            <form class="add-burger">
+                <div class="form-group">
+                    <label for="newBurger" class="" style="font-weight: bold;">Burger name:</label>
+                    <input type="text" id="newBurger" name="name" style="height:25px;">
+                    <button type="submit" class="btn btn-success" style="border: solid white 1px">Add</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
