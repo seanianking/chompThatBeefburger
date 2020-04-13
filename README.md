@@ -2,7 +2,7 @@
 
 ### Link to the deployed site
 
-https://seanianking.github.io/Dayinthelife/
+https://chompin-down.herokuapp.com/
 
 ## Contents
 
